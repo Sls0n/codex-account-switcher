@@ -40,3 +40,12 @@ export class PromptCancelledError extends CodexAuthError {
     super("No account selected. The operation was cancelled.");
   }
 }
+
+export class CannotDeleteActiveAccountError extends CodexAuthError {
+  constructor(accountName: string) {
+    super(
+      `Cannot delete the currently active account "${accountName}". ` +
+        `Switch to another account first using "codex-auth use <name>".`,
+    );
+  }
+}

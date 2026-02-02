@@ -5,6 +5,7 @@ import { accountsDir, authPath, codexDir, currentNamePath } from "../config/path
 import {
   AccountNotFoundError,
   AuthFileMissingError,
+  CannotDeleteActiveAccountError,
   InvalidAccountNameError,
 } from "./errors";
 
@@ -69,6 +70,23 @@ export class AccountService {
     }
 
     await this.writeCurrentName(name);
+    return name;
+  }
+
+  public async removeAccount(rawName: string): Promise<string> {
+    const name = this.normalizeAccountName(rawName);
+    const accountPath = this.accountFilePath(name);
+
+    if (!(await this.pathExists(accountPath))) {
+      throw new AccountNotFoundError(name);
+    }
+
+    const currentAccount = await this.getCurrentAccountName();
+    if (currentAccount === name) {
+      throw new CannotDeleteActiveAccountError(name);
+    }
+
+    await fsp.rm(accountPath, { force: true });
     return name;
   }
 

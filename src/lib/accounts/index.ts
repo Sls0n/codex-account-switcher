@@ -4,6 +4,7 @@ export { AccountService } from "./account-service";
 export {
   AccountNotFoundError,
   AuthFileMissingError,
+  CannotDeleteActiveAccountError,
   CodexAuthError,
   InvalidAccountNameError,
   NoAccountsSavedError,

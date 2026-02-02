@@ -31,6 +31,12 @@ codex-auth use <name>
 # or pick interactively
 codex-auth use
 
+# delete a saved account
+codex-auth delete <name>
+
+# or pick interactively
+codex-auth delete
+
 # list accounts
 codex-auth list
 
@@ -42,6 +48,7 @@ codex-auth current
 
 - `codex-auth save <name>` – Validates `<name>`, ensures `auth.json` exists, then snapshots it to `~/.codex/accounts/<name>.json`.
 - `codex-auth use [name]` – Accepts a name or launches an interactive selector with the current account pre-selected. Copies on Windows, creates a symlink elsewhere, and records the active name.
+- `codex-auth delete [name]` – Accepts a name or launches an interactive selector. Removes the saved account from `~/.codex/accounts/`. Cannot delete the currently active account.
 - `codex-auth list` – Lists all saved snapshots alphabetically and marks the active one with `*`.
 - `codex-auth current` – Prints the active account name, or a friendly message if none is active.
 
